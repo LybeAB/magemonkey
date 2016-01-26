@@ -606,6 +606,16 @@ class Ebizmarts_MageMonkey_Helper_Data extends Mage_Core_Helper_Abstract
             if ($country) {
                 $merge_vars['COUNTRY'] = $country;
             }
+
+            # LYBE: Björn [Add City and Zip as standard vars in the MERGEVARS mapping]
+            $city = $address->getCity();
+            if ($city) {
+                $merge_vars['CITY'] = $city;
+            }
+            $zip = $address->getPostcode();
+            if ($zip) {
+                $merge_vars['ZIP'] = $zip;
+            }
         }
         return $merge_vars;
     }
