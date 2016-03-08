@@ -61,7 +61,24 @@
             <action method="addJs" module="monkey">
                 <script helper="monkey/getCanShowCampaignJs"></script>
             </action>
+            <!-- LYBE: Björn [Style css] -->
+            <action method="addCss">
+                <stylesheet>magemonkey/css/lybe-magemonkey.css</stylesheet>
+            </action>
+            
         </reference>
+
+        <!-- Mage_Newsletter -->
+        <reference name="left">
+            <action method="unsetChild"><name>left.newsletter</name></action>
+            <block type="newsletter/subscribe" name="left.magemonkey.newsletter" template="magemonkey/newsletter/subscribe.phtml"/>
+        </reference>
+        
+        <!-- LYBE: Björn [Add popup template] -->
+        <reference name="before_body_end">
+            <block type="newsletter/subscribe" name="popup.magemonkey.newsletter" template="magemonkey/newsletter/popup/subscribe.phtml"/>
+        </reference>
+        
     </default>
 
 </layout>

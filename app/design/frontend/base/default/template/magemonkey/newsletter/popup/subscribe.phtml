@@ -1,0 +1,91 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+
+<!-- LYBE: Björn [#3 Popup] -->
+<?php $newsletterIsShown = Mage::getModel('core/cookie')->get('newsletter_popup'); ?>            
+
+<!-- LYBE: Björn [Cookie] -->
+<?php if ($newsletterIsShown !== '1'): ?>
+    <!-- Add content to the popup -->
+    <div id="newsletter_popup">
+        <div class="block block-subscribe">
+            <!-- Add an optional button to close the popup -->
+            <button class="newsletter_popup_close"><?php echo $this->__('Close') ?></button>
+            
+            <div class="block-title">
+                <strong><span><?php echo $this->__('Newsletter') ?></span></strong>
+            </div>
+            <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+                <div class="block-content">
+                    <div class="input-box">
+                       <input type="text" name="email" id="newsletter" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Sign up for our newsletter')) ?>" placeholder="<?php echo $this->__('Email') ?>" class="input-text required-entry validate-email" />
+                    </div>
+
+                    <?php # LYBE: Björn
+                    /*
+                        TODO
+                        1. Add support for GeoIP fallback
+                    */ 
+                    ?>
+                    <div class="input-box">
+                        <input type="text" name="city" value="" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Your City')) ?>" placeholder="<?php echo $this->__('City') ?>" class="input-text mailchimp_extra_field">
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Subscribe')) ?>" class="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+                    </div>
+                </div>
+            </form>
+            <script type="text/javascript">
+            //<![CDATA[
+                var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+            //]]>
+            </script>
+        </div>
+
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript">var $j = jQuery.noConflict();</script>
+
+    <!-- Include jQuery Popup Overlay -->
+    <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.10/jquery.popupoverlay.js"></script>
+
+    <script>
+    jQuery(document).ready(function($) {
+        $('#newsletter_popup').popup({
+            onclose: function (e){
+                <?php Mage::getModel('core/cookie')->set('newsletter_popup', '1');?>
+            }
+        });
+        // Initialize popup
+        $('#newsletter_popup').popup('show');
+    });
+    </script>
+<?php endif ?>

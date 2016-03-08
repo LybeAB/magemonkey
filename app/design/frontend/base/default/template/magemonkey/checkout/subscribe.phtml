@@ -110,13 +110,12 @@ $force = $this->getForce();
 </script>
 <div class="buttons-set"<?php if ($check === 3): ?> style="display:none;"<?php endif; ?>>
     <!-- General Subscription -->
-    <div class="page-title">
-        <h1><?php echo $this->__('Newsletter Subscription'); ?></h1>
-    </div>
+    <h2><?php echo $this->__('Newsletter Subscription'); ?></h2>
     <?php echo $this->getBlockHtml('formkey'); ?>
     <div class="monkey-multisubscribe">
         <ul class="monkey-general-list">
-            <li class="listdata"><?php echo $generalList['name']; ?>
+            <?php # LYBE: Björn [Dont show ugly list name]  ?>
+            <li class="listdata"><?php #echo $generalList['name']; ?>
                 <input<?php if ($auto): ?> checked="checked"<?php endif; ?> type="checkbox"
                                                                             onchange="addSubscribeToPost(this);"
                                                                             name="list[<?php echo $generalList['id'] ?>][subscribed]"

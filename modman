@@ -37,5 +37,4 @@ skin/adminhtml/default/default/ebizmarts                                skin/adm
 skin/adminhtml/default/default/magemonkey                               skin/adminhtml/default/default/magemonkey
 skin/frontend/base/default/magemonkey                                   skin/frontend/base/default/magemonkey
 lib/Mandrill/                                                           lib/Mandrill/
-
-
+app/locale/sv_SE/Ebizmarts_MageMonkey.csv                               app/locale/sv_SE/Ebizmarts_MageMonkey.csv
