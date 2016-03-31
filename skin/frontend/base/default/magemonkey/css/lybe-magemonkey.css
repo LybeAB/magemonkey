@@ -3,3 +3,9 @@
 
 .newsletter_popup_close {
   float: right; }
+
+.newsletter-label {
+  padding: 1px 10px 0;
+  font-weight: bold;
+  display: inline-block;
+  float: left; }
